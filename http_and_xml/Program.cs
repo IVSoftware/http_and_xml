@@ -32,9 +32,6 @@ namespace http_and_xml
         }
 	}
 
-	// https://stackoverflow.com/questions/1556874/user-xmlns-was-not-expected-deserializing-twitter-xml
-
-	// [XmlRoot(Namespace = "http://ergast.com/mrd/1.5", ElementName = "MRData", DataType = "string", IsNullable = false)]
     public class Wrapper
     {
         public MRData MRData { get; set; }
@@ -53,9 +50,7 @@ namespace http_and_xml
         public Race[] Races { get; set; }
     }
 
-
-
-
+    #region O P    C l a s s e s    u s e d    a s - i s
     public class Race
     {
         public string RaceName { set; get; }
@@ -86,4 +81,5 @@ namespace http_and_xml
         public string Date { set; get; }
         public string Time { set; get; }
     }
+    #endregion O P    C l a s s e s    u s e d    a s - i s
 }
