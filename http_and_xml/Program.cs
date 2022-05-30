@@ -15,7 +15,8 @@ namespace http_and_xml
         static void Main(string[] args)
         {
             string text;
-            using (StreamReader sr = new StreamReader(new WebClient().OpenRead("http://ergast.com/api/f1/2022")))
+            using (StreamReader sr = new StreamReader(
+                new WebClient().OpenRead("http://ergast.com/api/f1/2022")))
             {
                 text = sr.ReadToEnd();
             }
@@ -24,6 +25,7 @@ namespace http_and_xml
                     Formatting.Indented); // Pleasing to the eye
             var wrapper = (Wrapper)JsonConvert.DeserializeObject<Wrapper>(json);
 
+            Console.WriteLine($"Races for the {wrapper.MRData.RaceTable.Season} season.");
             Console.WriteLine($"Found {wrapper.MRData.RaceTable.Races.Length} races");
             var race0 = wrapper.MRData.RaceTable.Races[0];
             Console.WriteLine($"{race0.RaceName} is taking place at {race0.Circuit.CircuitName}");
