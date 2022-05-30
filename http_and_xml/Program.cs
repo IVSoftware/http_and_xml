@@ -14,19 +14,19 @@ namespace http_and_xml
     {
         static void Main(string[] args)
         {
-            WebClient client = new WebClient();
-            Wrapper wrapper;
-            using (StreamReader sr = new StreamReader(client.OpenRead("http://ergast.com/api/f1/2022")))
+            string text;
+            using (StreamReader sr = new StreamReader(new WebClient().OpenRead("http://ergast.com/api/f1/2022")))
             {
-                string text = sr.ReadToEnd();
-                string jsonText = 
-                    JsonConvert.SerializeXNode(
-                        XElement.Parse(text), 
-                        Formatting.Indented
-                     );
-                wrapper = JsonConvert.DeserializeObject<Wrapper>(jsonText);
+                text = sr.ReadToEnd();
             }
-            Console.WriteLine(wrapper.MRData.RaceTable.Races[0].Circuit.CircuitName);
+            var json =  JsonConvert.SerializeXNode(
+                    XElement.Parse(text), 
+                    Formatting.Indented); // Pleasing to the eye
+            var wrapper = (Wrapper)JsonConvert.DeserializeObject<Wrapper>(json);
+
+            Console.WriteLine($"Found {wrapper.MRData.RaceTable.Races.Length} races");
+            var race0 = wrapper.MRData.RaceTable.Races[0];
+            Console.WriteLine($"{race0.RaceName} is taking place at {race0.Circuit.CircuitName}");
         }
 	}
 
