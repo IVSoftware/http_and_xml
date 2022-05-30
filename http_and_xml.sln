@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32413.511
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "http_and_xml", "http_and_xml\http_and_xml.csproj", "{1F74160C-1793-4281-9E41-B8BF26BF6DBE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1F74160C-1793-4281-9E41-B8BF26BF6DBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F74160C-1793-4281-9E41-B8BF26BF6DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F74160C-1793-4281-9E41-B8BF26BF6DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F74160C-1793-4281-9E41-B8BF26BF6DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {86C5CD8B-FA9A-4CBA-9900-17FCA985B3D6}
+	EndGlobalSection
+EndGlobal
