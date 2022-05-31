@@ -14,21 +14,32 @@ namespace http_and_xml
     {
         static void Main(string[] args)
         {
-            string text;
+            string plaintext;
             using (StreamReader sr = new StreamReader(
                 new WebClient().OpenRead("http://ergast.com/api/f1/2022")))
             {
-                text = sr.ReadToEnd();
+                plaintext = sr.ReadToEnd();
             }
-            var json =  JsonConvert.SerializeXNode(
-                    XElement.Parse(text), 
-                    Formatting.Indented); // Pleasing to the eye
-            var wrapper = (Wrapper)JsonConvert.DeserializeObject<Wrapper>(json);
+            
+            // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+            // Two steps instead of one because IJW.
+            // XElement parse takes any valid XML (i.e. does not enforce a schema).
+            XElement xel = XElement.Parse(plaintext);
+            // Convert it to Json text.
+            var jsontext =  JsonConvert.SerializeXNode(
+                    xel, 
+                    Formatting.Indented); // More readable.
+            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+            // JsonConvert is very fault tolerant. It deserializes the
+            // properies in the model, ignores those that aren't, and
+            // won't break if queried for properties that it can't provide.
+            var wrapper = (Wrapper)JsonConvert.DeserializeObject<Wrapper>(jsontext);
 
             Console.WriteLine($"Races for the {wrapper.MRData.RaceTable.Season} season.");
             Console.WriteLine($"Found {wrapper.MRData.RaceTable.Races.Length} races");
             var race0 = wrapper.MRData.RaceTable.Races[0];
-            Console.WriteLine($"{race0.RaceName} is taking place at {race0.Circuit.CircuitName}");
+            Console.WriteLine($"{race0.RaceName} is on {race0.Circuit.CircuitName}");
         }
 	}
 
